@@ -6,8 +6,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/navigation';
 
 
@@ -20,23 +18,14 @@ export default function ButtonAppBar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ backgroundColor: '#3b3b3bff' }} elevation={6}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+    <Box sx={{ flexGrow: 1 }} padding={2}>
+      <AppBar position="static" style={{ backgroundColor: '#3b3b3bff', padding: 8}} elevation={6}>
+        <Toolbar>  
           <Box
             style={{
               width: 200,
-              height: 40,
-              backgroundImage: "url('/assets/logo.png')",
+              height: 70,
+              backgroundImage: "url('/assets/logo-navbar.png')",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               backgroundSize: "contain"
@@ -46,11 +35,11 @@ export default function ButtonAppBar() {
             <Button color="inherit">Faça seu orçamento</Button>
           </Typography>
 
-          <Button color="inherit" onClick={() => handleClick('/')}>Home</Button>
-          <Button color="inherit" onClick={() => handleClick('/quem-somos')}>Quem somos</Button>
+          <Button color="inherit" onClick={() => handleClick('/')}>Inicio</Button>
+          {/* <Button color="inherit" onClick={() => handleClick('/quem-somos')}>Quem somos</Button> */}
           <Button color="inherit" onClick={() => handleClick('/laminado')}>Pisos Laminados</Button>
           <Button color="inherit" onClick={() => handleClick('/vinilico')}>Pisos Vinílicos</Button>
-          <Button color="inherit" onClick={() => handleClick('/rodape')}>Rodapé</Button>
+          <Button color="inherit" onClick={() => handleClick('/acabamento')}>Acabamento</Button>
           <Button color="inherit" onClick={() => handleClick('/contato')}>Contatos</Button>
         </Toolbar>
       </AppBar>

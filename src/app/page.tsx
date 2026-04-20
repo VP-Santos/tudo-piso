@@ -1,19 +1,27 @@
-'use client';
-
-import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography, Container } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import Navbar from './components/Navbar';
 import AreaCard from './components/Cards';
 import MyFooter from './components/Fotter';
 import Displaypiso from './components/Displaypiso';
-import { useRouter } from 'next/navigation';
+import { prisma } from '@/lib/prisma';
+import Link from 'next/link';
 
-export default function Home() {
+
+export default async function Home() {
+  const categoryMap = await prisma.categories.findMany();
+
   return (
     <>
       <Navbar />
-
       <Container>
-        <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} my={4} alignItems="center" justifyContent="center">
+        <Box
+          display="flex"
+          flexDirection={{ xs: 'column', md: 'row' }}
+          my={4}
+          alignItems="center"
+          justifyContent="center"
+        >
           <Box flex={1}>
             <Paper
               elevation={6}
@@ -32,48 +40,58 @@ export default function Home() {
               <Typography variant="h4" gutterBottom>
                 Conheça os nossos pisos!
               </Typography>
+
               <Typography paragraph>
-                O piso laminado é um tipo de piso que proporciona maior conforto térmico qualquer que seja a estação, deixando o ambiente mais aconchegante.
+                O piso laminado é um tipo de piso que proporciona maior conforto térmico em qualquer estação.
               </Typography>
-              <Button variant="contained" color="primary">
+
+              <Button variant="contained">
                 Descubra mais sobre nós!
               </Button>
             </Paper>
           </Box>
 
-          <Displaypiso>
-          </Displaypiso>
+          <Displaypiso />
         </Box>
 
         <Box py={5}>
           <Grid container spacing={3} justifyContent="center">
-            <Grid item xs={12} sm={6} md={4}>
-              <AreaCard nome="laminado" image="assets/Categoria/laminado.png" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <AreaCard nome="vinilico" image="assets/Categoria/vinilico.png" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <AreaCard nome="rodape" image="assets/Categoria/rodape.png" />
-            </Grid>
+            {categoryMap.map((item) => {
+              const slug = item.name;
+
+              return (
+                <Grid item key={item.id}>
+                  <Link
+                    href={`/${slug}`}
+                    style={{ textDecoration: 'none', display: 'block' }}
+                  >
+                    <AreaCard
+                      id={item.id}
+                      nome={item.name}
+                      image={item.image}
+                    />
+                  </Link>
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
 
         <Box my={5}>
           <Paper elevation={8} sx={{ padding: 4 }}>
             <Typography variant="h5" align="center" gutterBottom>
-              Sobre a Yamamoto Pisos
+              Sobre a Tudo Piso
             </Typography>
+
             <Typography variant="h6" align="center" gutterBottom>
               Alto padrão e excelência
             </Typography>
+
             <Typography variant="body1">
               Desde 2011 sem Reclame Aqui e Procon! <br />
-              Somos uma empresa especializada em venda e instalação de pisos laminados. <br />
-              Frota própria, eficiência e rapidez na entrega! <br />
-              Fácil instalação, limpeza prática e rápida. <br />
-              Temos uma equipe qualificada e experiente garantindo um piso perfeito. <br />
-              Atendemos toda a região do ABC (Diadema, São Bernardo do Campo, Santo André e São Caetano), São Paulo e Grande São Paulo.
+              Somos especialistas em pisos laminados. <br />
+              Frota própria, entrega rápida e equipe qualificada. <br />
+              Atendemos toda a região do ABC e São Paulo.
             </Typography>
           </Paper>
         </Box>
@@ -91,7 +109,8 @@ export default function Home() {
           }}
         />
       </Box>
-      <MyFooter></MyFooter>
+
+      <MyFooter />
     </>
   );
 }

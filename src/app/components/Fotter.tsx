@@ -7,19 +7,24 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 export default function MyFooter() {
     return (
 
-        <Box id="footer" display="flex" flexDirection={{ xs: 'column', md: 'row' }} justifyContent="space-between" px={6} py={4} bgcolor="#f5f5f5">
+        <Box id="footer" display="flex" flexDirection={{ xs: 'column', md: 'row' }} alignItems='center' justifyContent="space-between" px={6} py={4} bgcolor="#f5f5f5">
             <Box
                 sx={{
-                    width: 200,
-                    height: 40,
-                    backgroundImage: "url('/assets/logo.png')",
+                    width: 400,
+                    height: 200,
+                    backgroundImage: "url('/assets/footer-logo.png')",
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundSize: 'contain',
                     mb: { xs: 4, md: 0 },
                 }}
-            />
-
+            >
+            <Typography
+            sx={{
+                
+            }}
+            >Não colocamos um piso, nós realizamos um sonho!</Typography>
+            </Box>
             <Box>
                 <Typography variant="h6" gutterBottom>
                     Contatos
