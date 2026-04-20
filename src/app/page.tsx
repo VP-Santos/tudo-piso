@@ -60,7 +60,7 @@ export default async function Home() {
               const slug = item.name;
 
               return (
-                <Grid item key={item.id}>
+                <Grid key={item.id}>
                   <Link
                     href={`/${slug}`}
                     style={{ textDecoration: 'none', display: 'block' }}

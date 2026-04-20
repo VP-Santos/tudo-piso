@@ -1,12 +1,11 @@
+import Navbar from '@/app/components/Navbar'
 import { Container } from '@mui/material'
-import Navbar from '../components/Navbar'
 
-export default function QuemSomos(){
+export default async function ProductPage(){
     return (
         <>
-        <Navbar></Navbar>
+        <Navbar/>
         <Container>
-            CONTATOS
         </Container>
         </>
     )
