@@ -5,9 +5,8 @@ export default function Fabricante(){
     
     return (
         <>
-        <Navbar></Navbar>
         <Container>
-            
+            FABRICANTES
         </Container>
         </>
     )

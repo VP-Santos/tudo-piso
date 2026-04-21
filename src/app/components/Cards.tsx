@@ -8,14 +8,13 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 
 interface Props {
-  id: number;
-  nome: string;
+  name: string;
   image: string;
   width?: number;
   height?: number;
 }
 
-export default function AreaCard({ id, nome, image, width = 350, height = 260, 
+export default function AreaCard({ name, image, width = 350, height = 260, 
 }: Props) {
   return (
     <Card sx={{ width: width }}>
@@ -25,11 +24,11 @@ export default function AreaCard({ id, nome, image, width = 350, height = 260,
           component="img"
           height={height}
           image={image}
-          alt="laminado"
+          alt={image}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div" align="center">
-            {nome}
+            {name}
           </Typography>
         </CardContent>
       </CardActionArea>

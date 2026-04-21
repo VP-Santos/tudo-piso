@@ -4,9 +4,8 @@ import Navbar from '../components/Navbar'
 export default function QuemSomos(){
     return (
         <>
-        <Navbar></Navbar>
         <Container>
-            CONTATOS
+            QUEM SOMOS
         </Container>
         </>
     )

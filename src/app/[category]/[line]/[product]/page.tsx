@@ -4,9 +4,7 @@ import { Container } from '@mui/material'
 export default async function ProductPage(){
     return (
         <>
-        <Navbar/>
-        <Container>
-        </Container>
+   
         </>
     )
 }

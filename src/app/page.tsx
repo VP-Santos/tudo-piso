@@ -1,20 +1,17 @@
 import { Box, Button, Paper, Typography, Container } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Navbar from './components/Navbar';
 import AreaCard from './components/Cards';
-import MyFooter from './components/Fotter';
 import Displaypiso from './components/Displaypiso';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import { categories } from '@prisma/client';
 
 
 export default async function Home() {
-  const categoryMap = await prisma.categories.findMany();
+  const categoryMap : categories[] = await prisma.categories.findMany();
 
   return (
     <>
-      <Navbar />
-      <Container>
         <Box
           display="flex"
           flexDirection={{ xs: 'column', md: 'row' }}
@@ -66,8 +63,7 @@ export default async function Home() {
                     style={{ textDecoration: 'none', display: 'block' }}
                   >
                     <AreaCard
-                      id={item.id}
-                      nome={item.name}
+                      name={item.name}
                       image={item.image}
                     />
                   </Link>
@@ -95,7 +91,6 @@ export default async function Home() {
             </Typography>
           </Paper>
         </Box>
-      </Container>
 
       <Box>
         <Paper
@@ -110,7 +105,6 @@ export default async function Home() {
         />
       </Box>
 
-      <MyFooter />
     </>
   );
-}
+};

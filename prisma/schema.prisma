@@ -1,16 +1,75 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model categories {
+  id                    BigInt                  @id(map: "category_pkey") @default(autoincrement())
+  name                  String
+  image                 String
+  category_manufacturer category_manufacturer[]
+  visits                visits[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model category_manufacturer {
+  id              BigInt          @id(map: "manufacturer_category_pkey") @default(autoincrement())
+  manufacturer_id BigInt
+  category_id     BigInt
+  categories      categories      @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "manufacturer_categories_category_id_fkey")
+  manufacturers   manufacturers   @relation(fields: [manufacturer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "manufacturer_categories_manufacturer_id_fkey")
+  product_lines   product_lines[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model manufacturers {
+  id                    BigInt                  @id @default(autoincrement())
+  name                  String                  @db.VarChar
+  description           String
+  origin                String                  @db.VarChar
+  image_path            String
+  category_manufacturer category_manufacturer[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model product_lines {
+  id                       BigInt                @id @default(autoincrement())
+  name                     String                @db.VarChar
+  width                    Float
+  length                   Float
+  category_manufacturer_id BigInt
+  description              String
+  image_path               String
+  category_manufacturer    category_manufacturer @relation(fields: [category_manufacturer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  products                 products[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model products {
+  id              BigInt         @id @default(autoincrement())
+  product_line_id BigInt?
+  name            String?        @db.VarChar
+  code            String?
+  image_path      String?
+  product_lines   product_lines? @relation(fields: [product_line_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model visits {
+  id         BigInt      @id @default(autoincrement())
+  created_at DateTime    @default(now()) @db.Timestamptz(6)
+  full_name  String?     @db.VarChar
+  email      String?     @db.VarChar
+  address    String?     @db.VarChar
+  city       String?     @db.VarChar
+  state      String?     @db.VarChar
+  cep        String?     @db.VarChar
+  interest   BigInt?
+  categories categories? @relation(fields: [interest], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
