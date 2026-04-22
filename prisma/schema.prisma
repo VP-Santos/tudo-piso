@@ -13,6 +13,7 @@ model categories {
   id                    BigInt                  @id(map: "category_pkey") @default(autoincrement())
   name                  String
   image                 String
+  description           String?
   category_manufacturer category_manufacturer[]
   visits                visits[]
 }
@@ -52,12 +53,12 @@ model product_lines {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model products {
-  id              BigInt         @id @default(autoincrement())
-  product_line_id BigInt?
-  name            String?        @db.VarChar
-  code            String?
-  image_path      String?
-  product_lines   product_lines? @relation(fields: [product_line_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id              BigInt        @id @default(autoincrement())
+  product_line_id BigInt
+  name            String        @db.VarChar
+  code            String
+  image_path      String
+  product_lines   product_lines @relation(fields: [product_line_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.

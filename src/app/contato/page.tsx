@@ -1,12 +1,15 @@
-import { Container } from '@mui/material'
-import Navbar from '../components/Navbar'
+import { Container, Paper } from "@mui/material";
+import NavBar from "../components/NavBar";
 
-export default function Contato(){
+export default function Contato() {
     return (
         <>
-        <Container>
-            CONTATOS
-        </Container>
+            <NavBar />
+            <Container maxWidth='xl'>
+                <Paper>
+                    Contato
+                </Paper>
+            </Container>
         </>
     )
 }
