@@ -1,5 +1,5 @@
-import AreaCard from '@/app/components/Cards';
-import NavBar from '@/app/components/NavBar';
+import AreaCard from '@/app/components/Server/Cards';
+import NavBar from '@/app/components/Server/NavBar';
 import { prisma } from '@/lib/prisma';
 import { Box, Container, Typography } from '@mui/material';
 import Link from 'next/link';

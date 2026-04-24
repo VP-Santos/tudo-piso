@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Server/NavBar";
 import { Box, Paper, Typography, Stack, Divider, Container } from "@mui/material";
-import AreaCard from "../components/Cards";
+import AreaCard from "../components/Server/Cards";
 import Link from "next/link";
 
 
@@ -33,51 +33,40 @@ export default async function CategoryPage({ params }: {
     <>
       <NavBar />
       <Container maxWidth='xl'>
-          <Paper
-            elevation={2}
+        <Paper
+          elevation={2}
+          sx={{
+            mt: 6,
+            mb: 6,
+            borderRadius: 3,
+            textAlign: "center",
+            backgroundColor: '#dddddd'
+          }}
+        >
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{ mb: 2 }}
+          >
+            {capitalize(categoryData.name)}
+          </Typography>
+
+          <Typography
+            variant="body1"
+            color="text.secondary"
             sx={{
-              mt: 6,
-              mb: 6,
-              p: { xs: 3, md: 5 },
-              borderRadius: 3,
-              textAlign: "center",
-              background: "linear-gradient(to right, #ffffff, #f9f9f9)",
+              maxWidth: 750,
+              mx: "auto",
+              lineHeight: 1.7,
             }}
           >
-            <Typography
-              variant="h6"
-              fontWeight={600}
-              sx={{ mb: 2 }}
-            >
-              {capitalize(categoryData.name)}
-            </Typography>
-
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{
-                maxWidth: 750,
-                mx: "auto",
-                lineHeight: 1.7,
-              }}
-            >
-              {categoryData?.description ||
-                "Texto aqui"}
-            </Typography>
-          </Paper>
+            {categoryData?.description ||
+              "Texto aqui"}
+          </Typography>
 
 
           {categoryData?.category_manufacturer.map((item) => (
-            <Paper
-              key={item.id}
-              elevation={3}
-              sx={{
-                mb: 6,
-                p: 4,
-                borderRadius: 3,
-                background: "linear-gradient(to bottom, #ffffff, #fafafa)",
-              }}
-            >
+            <Box bgcolor={'#fff'} p={4}>
               <Stack
                 direction="row"
                 spacing={3}
@@ -96,35 +85,26 @@ export default async function CategoryPage({ params }: {
                     filter: "drop-shadow(0px 2px 6px rgba(0,0,0,0.1))",
                   }}
                 />
-              </Stack>
 
-              <Box
-                sx={{
-                  textAlign: "center",
-                  mb: 4,
-                  px: 2,
-                }}
-              >
-                <Typography variant="h6" fontWeight={600}>
-                  {item.manufacturers?.name}
-                </Typography>
 
-                <Typography variant="body2" color="text.secondary">
-                  Origem: {item.manufacturers?.origin}
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  sx={{ mt: 1, maxWidth: 700, mx: "auto" }}
-                  color="text.secondary"
+                <Box
+                  sx={{
+                    textAlign: "center",
+                    mb: 4,
+                    px: 2,
+                  }}
                 >
-                  {item.manufacturers?.description}
-                </Typography>
-              </Box>
+                  <Typography variant="h6" fontWeight={600}>
+                    {item.manufacturers?.name}
+                  </Typography>
 
-              <Divider sx={{ mb: 3 }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Origem: {item.manufacturers?.origin}
+                  </Typography>
 
-
+                </Box>
+              </Stack>
+              
               <Box
                 sx={{
                   display: "grid",
@@ -165,8 +145,9 @@ export default async function CategoryPage({ params }: {
                   );
                 })}
               </Box>
-            </Paper>
+            </Box>
           ))}
+        </Paper>
       </Container>
     </>
   );

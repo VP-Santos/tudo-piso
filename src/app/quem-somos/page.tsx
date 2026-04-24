@@ -1,6 +1,6 @@
 import { Box, Container, Paper, Typography } from '@mui/material'
-import Navbar from '../components/NavBar'
-import Fotter from '../components/Fotter'
+import Navbar from '../components/Server/NavBar'
+import Fotter from '../components/Server/Fotter'
 
 export default function QuemSomos() {
     return (

@@ -34,9 +34,6 @@ export default async function NavBar() {
           <Link href={'/quem-somos'}>
             <Button >Quem somos</Button>
           </Link>
-          <Link href={'/contato'}>
-            <Button >Contato</Button>
-          </Link>
         </Toolbar>
       </AppBar>
     </Box>

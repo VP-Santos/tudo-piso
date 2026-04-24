@@ -1,5 +1,5 @@
-import NavBar from "@/app/components/NavBar";
-import Navbar from "@/app/components/NavBar";
+import NavBar from "@/app/components/Server/NavBar";
+import Navbar from "@/app/components/Server/NavBar";
 import { prisma } from "@/lib/prisma";
 import { Container, Typography, Box } from "@mui/material";
 
