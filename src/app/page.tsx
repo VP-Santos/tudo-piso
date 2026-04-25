@@ -59,7 +59,7 @@ export default async function Home() {
         <Box py={3}>
           <Grid container spacing={5} justifyContent="center">
             {categories.map((item) => {
-              const slug = item.name.toLowerCase().replace(/\s+/g, '-');
+              const slug = item.slug.toLowerCase().replace(/\s+/g, '-');
 
               return (
                 <Grid key={item.id}>

@@ -8,16 +8,16 @@ export default async function LinePage({ params }: { params: { category: string,
     const { line: categoryLine } = await params;
     const { category: category } = await params;
 
-    const formattedName = categoryLine.replace('-', ' ');
-
     const lineData = await prisma.product_lines.findFirst({
         where: {
-            name: formattedName,
+            slug: categoryLine,
         },
         include: {
             products: true,
         },
     });
+    
+    if(!lineData) return <></>;
 
     const products = lineData?.products ?? [];
 
@@ -31,7 +31,7 @@ export default async function LinePage({ params }: { params: { category: string,
                     gutterBottom
                     sx={{ fontWeight: 600, textTransform: 'uppercase' }}
                 >
-                    {formattedName}
+                    {lineData.name}
                 </Typography>
 
                 {products.length === 0 ? (
@@ -48,7 +48,7 @@ export default async function LinePage({ params }: { params: { category: string,
                         }}
                     >
                         {products.map((product) => (
-                            <Link key={product.id} href={`/${category}/${categoryLine}/${product.name.replaceAll(' ', '-')}`}>
+                            <Link key={product.id} href={`/${category}/${categoryLine}/${product.slug}`}>
                                 <AreaCard
                                     key={product.id}
                                     name={product.name}

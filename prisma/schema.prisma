@@ -13,7 +13,8 @@ model categories {
   id                    BigInt                  @id(map: "category_pkey") @default(autoincrement())
   name                  String
   image                 String
-  description           String?
+  description           String
+  slug                  String
   category_manufacturer category_manufacturer[]
   visits                visits[]
 }
@@ -35,6 +36,7 @@ model manufacturers {
   description           String
   origin                String                  @db.VarChar
   image_path            String
+  slug                  String
   category_manufacturer category_manufacturer[]
 }
 
@@ -47,6 +49,7 @@ model product_lines {
   category_manufacturer_id BigInt
   description              String
   image_path               String
+  slug                     String
   category_manufacturer    category_manufacturer @relation(fields: [category_manufacturer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   products                 products[]
 }
@@ -58,6 +61,7 @@ model products {
   name            String        @db.VarChar
   code            String
   image_path      String
+  slug            String
   product_lines   product_lines @relation(fields: [product_line_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 

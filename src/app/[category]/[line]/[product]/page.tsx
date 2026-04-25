@@ -10,11 +10,10 @@ export default async function ProductPage({
 }) {
     const { product: productSlug } = await params;
 
-    const formattedName = productSlug.replaceAll('-', ' ');
 
     const productFind = await prisma.products.findFirst({
         where: {
-            name: formattedName
+            slug: productSlug
         }, include: {
             product_lines: true
 
