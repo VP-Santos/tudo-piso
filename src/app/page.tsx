@@ -9,9 +9,8 @@ import NavBar from './components/Server/NavBar';
 import Footer from './components/Server/Fotter';
 
 export default async function Home() {
-  const categories = await prisma.categories.findMany();
-
-
+  const categories = await prisma.categories.findMany({orderBy: {id : 'asc'}});
+  
   return (
     <Box component="main">
       <NavBar />

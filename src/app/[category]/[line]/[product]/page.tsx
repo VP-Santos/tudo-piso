@@ -75,10 +75,6 @@ export default async function ProductPage({
                                             Código: {productFind.code}
                                         </Typography>
 
-                                        <Typography variant="body1" sx={{ mt: 2 }}>
-                                            {productFind.product_lines?.description}
-                                        </Typography>
-
                                         <Box sx={{ mt: 3 }}>
                                             <Typography variant="subtitle1" fontWeight={600}>
                                                 Linha do produto

@@ -47,7 +47,6 @@ model product_lines {
   width                    Float
   length                   Float
   category_manufacturer_id BigInt
-  description              String
   image_path               String
   slug                     String
   category_manufacturer    category_manufacturer @relation(fields: [category_manufacturer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)

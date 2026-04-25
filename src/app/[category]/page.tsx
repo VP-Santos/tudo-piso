@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import AreaCard from "../components/Server/Cards";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
 type Props = {
@@ -19,7 +18,7 @@ type Props = {
 const slugify = (value: string) =>
   value
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") 
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim()
     .replace(/\s+/g, "-");
@@ -68,15 +67,11 @@ export default async function CategoryPage({ params }: Props) {
             {category.name}
           </Typography>
 
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ maxWidth: '100%' }}
-          >
+          <Box sx={{ color: "text.secondary" }}>
             <ReactMarkdown>
               {category.description}
             </ReactMarkdown>
-          </Typography>
+          </Box>
 
           <Box mt={5}>
             {category.category_manufacturer.map((item) => (
