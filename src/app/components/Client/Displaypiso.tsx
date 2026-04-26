@@ -41,7 +41,7 @@ export default function Displaypiso() {
         position: 'relative',
         borderRadius: 3,
         overflow: 'hidden',
-        width: "50%"
+        width: "100%"
       }}
     >
       <Paper

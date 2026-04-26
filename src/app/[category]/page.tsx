@@ -6,6 +6,7 @@ import {
   Typography,
   Stack,
   Container,
+  Grid,
 } from "@mui/material";
 import AreaCard from "../components/Server/Cards";
 import Link from "next/link";
@@ -43,16 +44,20 @@ export default async function CategoryPage({ params }: Props) {
   if (!category) return <></>;
 
   return (
-    <>
+    <Box component={'main'} sx={{
+      xs: {
+        alignItems: 'center'
+      }
+    }}>
       <NavBar />
 
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" >
         <Paper
           elevation={1}
           sx={{
             mt: 6,
             mb: 6,
-            px: { xs: 2, md: 4 },
+            px: 4,
             py: 4,
             borderRadius: 3,
             backgroundColor: "#f5f5f5",
@@ -62,6 +67,7 @@ export default async function CategoryPage({ params }: Props) {
             variant="h4"
             component="h1"
             fontWeight={700}
+            textAlign={'center'}
             gutterBottom
           >
             {category.name}
@@ -73,23 +79,20 @@ export default async function CategoryPage({ params }: Props) {
             </ReactMarkdown>
           </Box>
 
-          <Box mt={5}>
-            {category.category_manufacturer.map((item) => (
-              <Paper
-                key={item.id}
-                elevation={0}
-                sx={{
-                  p: 3,
-                  mb: 4,
-                  borderRadius: 3,
-                  border: "1px solid #eee",
-                }}
-              >
-                <Stack
-                  direction="row"
-                  spacing={3}
-                  alignItems="center"
-                  sx={{ mb: 3 }}
+          {category.category_manufacturer.map((item) => {
+
+            return (
+              <Stack key={item.id}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: "#cfcfcf",
+                    boxShadow: 1,
+                  }}
                 >
                   <Box
                     component="img"
@@ -97,71 +100,51 @@ export default async function CategoryPage({ params }: Props) {
                     alt={`Logo ${item.manufacturers.name}`}
                     loading="lazy"
                     sx={{
-                      height: 70,
+                      height: 60,
+                      width: 60,
                       objectFit: "contain",
+                      borderRadius: 1,
+                      bgcolor: "#fff",
+                      p: 1,
                     }}
                   />
 
                   <Box>
-                    <Typography variant="h6" fontWeight={600}>
+                    <Typography variant="subtitle1" fontWeight={600}>
                       {item.manufacturers.name}
                     </Typography>
 
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                    >
+                    <Typography variant="body2" color="text.secondary">
                       {item.manufacturers.origin}
                     </Typography>
                   </Box>
-                </Stack>
+                </Box>
 
-                <Box
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: {
-                      xs: "1fr",
-                      sm: "repeat(2, 1fr)",
-                      md: "repeat(3, 1fr)",
-                      lg: "repeat(4, 1fr)",
-                    },
-                    gap: 2,
-                  }}
-                >
-                  {item.product_lines.map((line) => {
-                    const slug = slugify(line.slug);
+                <Grid container spacing={4} p={3}>
+                  {
+                    item.product_lines.map((line) => {
 
-                    return (
-                      <Link
-                        key={line.id}
-                        href={`/${categorySlug}/${slug}`}
-                        style={{ textDecoration: "none" }}
-                      >
-                        <Box
-                          sx={{
-                            height: "100%",
-                            transition: "all .2s ease",
-                            "&:hover": {
-                              transform: "translateY(-6px)",
-                            },
-                          }}
-                        >
+                      const slug = slugify(line.slug);
+
+                      return (
+                        <Grid key={line.id} size={{ xs: 12, sm: 6, md: 3 }}>
                           <AreaCard
-                            width="100%"
-                            height={140}
                             name={line.name}
                             image={line.image_path}
+                            link={`/${categorySlug}/${slug}`}
+                            height={140}
                           />
-                        </Box>
-                      </Link>
-                    );
-                  })}
-                </Box>
-              </Paper>
-            ))}
-          </Box>
+                        </Grid>
+                      );
+                    })
+                  }
+                </Grid>
+              </Stack>
+            );
+          })
+          }
         </Paper>
       </Container>
-    </>
+    </Box>
   );
 }

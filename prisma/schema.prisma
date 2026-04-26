@@ -49,6 +49,8 @@ model product_lines {
   category_manufacturer_id BigInt
   image_path               String
   slug                     String
+  thickness                String?
+  description              String?
   category_manufacturer    category_manufacturer @relation(fields: [category_manufacturer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   products                 products[]
 }
