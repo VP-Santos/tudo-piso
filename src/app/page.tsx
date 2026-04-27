@@ -142,6 +142,27 @@ export default async function Home() {
               <br /><br />
               Atendemos toda a região do ABC e São Paulo, levando qualidade e confiança a cada cliente.
             </Typography>
+            <Link href={'/formulario-contato'}>
+              <Button
+                variant="contained"
+                size="medium"
+                sx={{
+                  marginTop: 3,
+                  width: '50%',
+                  borderRadius: 999,
+                  backgroundColor: '#272727',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  fontSize: 15,
+                  py: 1.2,
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: '#000',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
+                  },
+                }}>Solicite sua visita técnica ainda hoje!</Button>
+            </Link>
           </Paper>
         </Box>
       </Container>

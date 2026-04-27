@@ -1,7 +1,8 @@
+import Footer from "@/app/components/Server/Fotter";
+import Image from "@/app/components/Server/Image";
 import NavBar from "@/app/components/Server/NavBar";
-import Navbar from "@/app/components/Server/NavBar";
 import { prisma } from "@/lib/prisma";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Paper, Grid, Divider } from "@mui/material";
 
 export default async function ProductPage({
     params,
@@ -20,82 +21,82 @@ export default async function ProductPage({
         }
     })
 
+    if (!productFind) return <></>;
+
     return (
-        <>
+        <Box>
             <NavBar />
             <Container maxWidth="xl">
-                <Box
-                    sx={{
-                        mt: 5,
-                        mb: 5,
-                        p: 4,
-                        borderRadius: 3,
-                        bgcolor: "#f9f9f9",
-                    }}
-                >
-                    <Typography variant="body1">
-                        {productFind && (
-                            <Box
-                                sx={{
-                                    mt: 5,
-                                    p: 4,
-                                    borderRadius: 3,
-                                    bgcolor: "#f9f9f9",
-                                    maxWidth: 900,
-                                    mx: "auto",
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        gap: 4,
-                                        flexDirection: { xs: "column", md: "row" },
-                                        alignItems: { xs: "center", md: "flex-start" },
-                                    }}
-                                >
-                                    <Box
-                                        component="img"
-                                        src={`/${productFind.image_path}`}
-                                        alt={productFind.name}
-                                        sx={{
-                                            width: { xs: "100%", md: 300 },
-                                            height: 300,
-                                            objectFit: "cover",
-                                            borderRadius: 2,
-                                            boxShadow: 2,
-                                        }}
-                                    />
+                <Paper elevation={8} style={{ borderRadius: 20 }}>
+                    <Grid container p={3} spacing={6} mt={4} mb={5}>
+                        <Grid size={{ xs: 12, sm: 6 }}>
+                            <Image
+                                path={`/${productFind.image_path}`}
+                                name={productFind.name}
+                            />
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6 }} sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between'
+                        }}>
+                            <Typography variant="h4" fontWeight={700} textAlign={'center'}>
+                                {productFind.name}
+                            </Typography>
+                            <Box>
+                                <Typography variant="body1" color="text.secondary" gutterBottom>
+                                    Código: {productFind.code}
+                                </Typography>
 
-                                    <Box sx={{ flex: 1 }}>
-                                        <Typography variant="h4" fontWeight={700} gutterBottom>
-                                            {productFind.name}
-                                        </Typography>
+                                <Typography variant="subtitle1" fontWeight={600}>
+                                    Linha do produto
+                                </Typography>
 
-                                        <Typography variant="body2" color="text.secondary" gutterBottom>
-                                            Código: {productFind.code}
-                                        </Typography>
+                                <Typography variant="body2">
+                                    {productFind.product_lines?.name}
+                                </Typography>
 
-                                        <Box sx={{ mt: 3 }}>
-                                            <Typography variant="subtitle1" fontWeight={600}>
-                                                Linha do produto
-                                            </Typography>
-
-                                            <Typography variant="body2">
-                                                {productFind.product_lines?.name}
-                                            </Typography>
-
-                                            <Typography variant="body2" color="text.secondary">
-                                                Dimensões: {productFind.product_lines?.width}cm x{" "}
-                                                {productFind.product_lines?.length}m
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </Box>
+                                <Typography variant="body2" color="text.secondary">
+                                    Dimensões: {productFind.product_lines?.width}cm x{" "}
+                                    {productFind.product_lines?.length}m
+                                </Typography>
                             </Box>
-                        )}
+                        </Grid>
+                    </Grid>
+                    <Typography variant="h5"
+                        textAlign={'center'}
+                        fontWeight={600}
+                        bgcolor={'#cfcfcf'}
+                        m={3}
+                        p={3}
+                        boxShadow={3}
+                        borderRadius={2}
+                    >Fotos de intalações
                     </Typography>
-                </Box>
+                    <Grid container spacing={3} p={3} mb={6}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Image
+                                path={`/${productFind.image_path}`}
+                                name={productFind.name}
+                            />
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Image
+                                path={`/${productFind.image_path}`}
+                                name={productFind.name}
+                            />
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Image
+                                path={`/${productFind.image_path}`}
+                                name={productFind.name}
+                            />
+                        </Grid>
+                    </Grid>
+                </Paper>
+
             </Container>
-        </>
+            <Footer />
+        </Box>
     );
 }

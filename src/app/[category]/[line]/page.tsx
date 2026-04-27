@@ -13,7 +13,7 @@ type PageProps = {
 };
 
 export default async function LinePage({ params }: PageProps) {
-    const { category, line } = params;
+    const { category, line } = await params;
 
     const lineData = await prisma.product_lines.findFirst({
         where: {

@@ -1,94 +1,95 @@
-import { Box, Container, Paper, Typography } from '@mui/material'
+import { Box, Container, Grid, Paper, Typography } from '@mui/material'
 import Navbar from '../components/Server/NavBar'
 import Fotter from '../components/Server/Fotter'
+import Image from '../components/Server/Image'
 
 export default function QuemSomos() {
     return (
-        <>
+        <Box>
             <Navbar />
 
             <Container maxWidth="xl">
-                <Box sx={{ py: 6 }}>
-                    <Paper
-                        elevation={6}
-                        sx={{
-                            p: { xs: 2, md: 4 },
-                            borderRadius: 3
-                        }}
+                <Paper elevation={3} sx={{ marginTop: 6, borderRadius: 2 }}>
+                    <Typography
+                        p={3}
+                        variant="h4"
+                        fontWeight="bold"
+                        textAlign={'center'}
                     >
-                        <Typography
-                            variant="h4"
-                            fontWeight="bold"
-                            gutterBottom
-                        >
-                            Quem Somos
-                        </Typography>
+                        Quem Somos
+                    </Typography>
 
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: { xs: 'column', md: 'row' },
-                                gap: 3,
-                                mt: 3
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    flex: 1,
-                                    height: 250,
-                                    bgcolor: 'grey.300',
-                                    borderRadius: 2,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <Typography>Imagem / Conteúdo</Typography>
-                            </Box>
+                    <Grid container spacing={3} p={3} mt={3} mb={3}>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                            <Typography variant="h6" >
+                                Nossa História
+                            </Typography>
+                            <Typography color="text.secondary">
+                                Aqui você pode escrever um texto institucional
+                                explicando a história da empresa, missão,
+                                valores e propósito.
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Typography variant='h5'
+                        textAlign={'center'}
+                        fontWeight={600}
+                        bgcolor={'#cfcfcf'}
+                        m={3}
+                        p={3}
+                        boxShadow={8}
+                        borderRadius={2}>
+                        Serviços que realizamos!
+                    </Typography>
 
-                            <Box
-                                sx={{
-                                    flex: 1,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <Typography variant="h6" gutterBottom>
-                                    Nossa História
-                                </Typography>
-                                <Typography color="text.secondary">
-                                    Aqui você pode escrever um texto institucional
-                                    explicando a história da empresa, missão,
-                                    valores e propósito.
-                                </Typography>
-                            </Box>
-                        </Box>
-
-                        <Box sx={{ mt: 5 }}>
-                            <Box
-                                sx={{
-                                    MaxWidth: 'auto',
-                                    minHeight: 200,
-                                    bgcolor: 'grey.300',
-                                    borderRadius: 2,
-                                    p: 3,
-                                    display: 'flex',
-                                    alignItems: 'center'
-                                }}
-                            >
-                                <Typography color="text.secondary">
-                                    Esse espaço pode ser usado para destacar
-                                    diferenciais da empresa, visão ou algum
-                                    conteúdo institucional relevante.
-                                </Typography>
-                            </Box>
-                        </Box>
-                    </Paper>
-                </Box>
+                    <Grid container spacing={3} p={3} mt={3} mb={3}>
+                        <Grid size={{xs:6, sm:4, md:3}}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                        <Grid size={{xs:6, sm:4, md:3}}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                        <Grid size={{xs:6, sm:4, md:3}}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                        <Grid size={{xs:6, sm:4, md:3}}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                        <Grid size={{xs:6, sm:4, md:3}}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                        <Grid size={{xs:6, sm:4, md:3}}>
+                            <Image
+                                path={'/assets/piso.jpg'}
+                                name={'foto'}
+                            />
+                        </Grid>
+                    </Grid>
+                </Paper>
             </Container>
 
             <Fotter />
-        </>
+        </Box>
     )
 }

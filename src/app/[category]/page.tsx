@@ -91,7 +91,7 @@ export default async function CategoryPage({ params }: Props) {
                     p: 2,
                     borderRadius: 2,
                     bgcolor: "#cfcfcf",
-                    boxShadow: 1,
+                    boxShadow: 5,
                   }}
                 >
                   <Box
