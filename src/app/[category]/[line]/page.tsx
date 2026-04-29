@@ -1,4 +1,4 @@
-import AreaCard from '@/app/components/Server/Cards';
+import AreaCard from '@/app/components/Server/CardImage';
 import Footer from '@/app/components/Server/Fotter';
 import NavBar from '@/app/components/Server/NavBar';
 import { prisma } from '@/lib/prisma';

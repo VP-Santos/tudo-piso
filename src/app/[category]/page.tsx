@@ -8,14 +8,14 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import AreaCard from "../components/Server/Cards";
-import Link from "next/link";
+import AreaCard from "../components/Server/CardImage";
 import ReactMarkdown from "react-markdown";
 
 type Props = {
   params: { category: string };
 };
 
+// TODO apagar função de replace
 const slugify = (value: string) =>
   value
     .normalize("NFD")
@@ -52,14 +52,15 @@ export default async function CategoryPage({ params }: Props) {
       <NavBar />
 
       <Container maxWidth="xl" >
+        {/*TODO COLOCAR ESTILOS EM ARQUIVOS A PARTE*/}
         <Paper
-          elevation={1}
+          elevation={8}
           sx={{
             mt: 6,
             mb: 6,
             px: 4,
             py: 4,
-            borderRadius: 3,
+            borderRadius: 10,
             backgroundColor: "#f5f5f5",
           }}
         >

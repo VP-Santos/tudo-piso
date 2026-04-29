@@ -2,11 +2,12 @@ import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
 
-import AreaCard from './components/Server/Cards';
-import Displaypiso from './components/Client/Displaypiso';
+import AreaCard from './components/Server/CardImage';
 import { prisma } from '@/lib/prisma';
 import NavBar from './components/Server/NavBar';
 import Footer from './components/Server/Fotter';
+import WhatsAppButton from './components/Client/WhatsappButton';
+import DisplayImages from './components/Server/DisplayImages';
 
 export default async function Home() {
   const categories = await prisma.categories.findMany({ orderBy: { id: 'asc' } });
@@ -23,7 +24,7 @@ export default async function Home() {
         <Grid container spacing={4} sx={{ width: '100%', alignItems: 'stretch' }} p={3}>
 
           <Grid size={{ xs: 12, md: 6 }} >
-            <Displaypiso />
+            <DisplayImages />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex' }}>
@@ -142,27 +143,7 @@ export default async function Home() {
               <br /><br />
               Atendemos toda a região do ABC e São Paulo, levando qualidade e confiança a cada cliente.
             </Typography>
-            <Link href={'/formulario-contato'}>
-              <Button
-                variant="contained"
-                size="medium"
-                sx={{
-                  marginTop: 3,
-                  width: '50%',
-                  borderRadius: 999,
-                  backgroundColor: '#272727',
-                  textTransform: 'none',
-                  fontWeight: 600,
-                  fontSize: 15,
-                  py: 1.2,
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    backgroundColor: '#000',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
-                  },
-                }}>Solicite sua visita técnica ainda hoje!</Button>
-            </Link>
+              <WhatsAppButton/>
           </Paper>
         </Box>
       </Container>

@@ -16,7 +16,6 @@ model categories {
   description           String
   slug                  String
   category_manufacturer category_manufacturer[]
-  visits                visits[]
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -57,25 +56,29 @@ model product_lines {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model products {
-  id              BigInt        @id @default(autoincrement())
-  product_line_id BigInt
-  name            String        @db.VarChar
-  code            String
-  image_path      String
-  slug            String
-  product_lines   product_lines @relation(fields: [product_line_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                      BigInt                    @id @default(autoincrement())
+  product_line_id         BigInt
+  name                    String                    @db.VarChar
+  code                    String
+  image_path              String
+  slug                    String
+  installations_performed installations_performed[]
+  product_lines           product_lines             @relation(fields: [product_line_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model visits {
-  id         BigInt      @id @default(autoincrement())
-  created_at DateTime    @default(now()) @db.Timestamptz(6)
-  full_name  String?     @db.VarChar
-  email      String?     @db.VarChar
-  address    String?     @db.VarChar
-  city       String?     @db.VarChar
-  state      String?     @db.VarChar
-  cep        String?     @db.VarChar
-  interest   BigInt?
-  categories categories? @relation(fields: [interest], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model installations_performed {
+  id                  BigInt                @id @default(autoincrement())
+  product_id          BigInt
+  image_path          String
+  images_istallations images_istallations[]
+  products            products              @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model images_istallations {
+  id                         BigInt                   @id(map: "Images_istallations_pkey") @default(autoincrement())
+  installations_performed_id BigInt?
+  image_path                 String?
+  installations_performed    installations_performed? @relation(fields: [installations_performed_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Images_istallations_installations_performed_id_fkey")
 }
