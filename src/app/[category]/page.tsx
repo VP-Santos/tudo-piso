@@ -15,15 +15,6 @@ type Props = {
   params: { category: string };
 };
 
-// TODO apagar função de replace
-const slugify = (value: string) =>
-  value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-");
-
 export default async function CategoryPage({ params }: Props) {
   const { category: categorySlug } = await params;
 
@@ -44,13 +35,8 @@ export default async function CategoryPage({ params }: Props) {
   if (!category) return <></>;
 
   return (
-    <Box component={'main'} sx={{
-      xs: {
-        alignItems: 'center'
-      }
-    }}>
+    <Box component={'main'}>
       <NavBar />
-
       <Container maxWidth="xl" >
         {/*TODO COLOCAR ESTILOS EM ARQUIVOS A PARTE*/}
         <Paper
@@ -125,15 +111,12 @@ export default async function CategoryPage({ params }: Props) {
                   {
                     item.product_lines.map((line) => {
 
-                      const slug = slugify(line.slug);
-
                       return (
                         <Grid key={line.id} size={{ xs: 12, sm: 6, md: 3 }}>
                           <AreaCard
                             name={line.name}
                             image={line.image_path}
-                            link={`/${categorySlug}/${slug}`}
-                            height={140}
+                            link={`/${categorySlug}/${line.slug}`}
                           />
                         </Grid>
                       );

@@ -27,8 +27,6 @@ export default async function ProductPage({
     }
   })
 
-  console.log(productFind);
-  
 
   if (!productFind) return <></>;
 
@@ -97,7 +95,10 @@ Linha: ${productFind.product_lines.name}`} />
               <Grid container spacing={3} p={3} mb={6}>
                 {productFind.installations_performed.map((installation) => (
                   <Grid key={installation.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                    <CardImageClient image_path={`/${installation.image_path}`} />
+                    <CardImageClient
+                      image_path={`/${installation.image_path}`}
+                      collectImage={installation.images_istallations}
+                    />
                   </Grid>
                 ))}
               </Grid>

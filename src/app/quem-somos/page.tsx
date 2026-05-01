@@ -13,7 +13,7 @@ export default async function QuemSomos() {
             <Navbar />
 
             <Container maxWidth="xl">
-                <Paper elevation={3} sx={{ marginTop: 6, borderRadius: 2 }}>
+                <Paper elevation={3} sx={{ marginTop: 2, borderRadius: 2 }}>
                     <Typography
                         p={3}
                         variant="h4"
@@ -23,7 +23,7 @@ export default async function QuemSomos() {
                         Quem Somos
                     </Typography>
 
-                    <Grid container spacing={3} p={3} mt={3} mb={3}>
+                    <Grid container spacing={3} p={3} mt={2} mb={2}>
                         <Grid size={{ xs: 12, md: 6 }}>
                             <Image
                                 path={'/assets/piso.jpg'}
@@ -66,7 +66,7 @@ export default async function QuemSomos() {
                     <Grid container spacing={3} p={3} mt={3} mb={3}>
                         {installations.map((installation) => {
                             return (
-                                <Grid key={installation.id} size={{ xs: 6, sm: 4, md: 3 }}>
+                                <Grid key={installation.id} size={{ xs: 12, sm: 4, md: 3 }}>
                                     <Image
                                         path={installation.image_path}
                                         name={'image_' + installation.id}

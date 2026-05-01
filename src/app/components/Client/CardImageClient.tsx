@@ -9,22 +9,29 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import ModalImage from "./ModalImage";
 
+interface collectImage {
+    id: bigint;
+    installations_performed_id: bigint;
+    image_path: string;
+}
+
 interface Props {
     name?: string;
     image_path: string;
     width?: number | string;
     height?: number;
+    collectImage: collectImage[]
 }
 
-export default function AreaCard({
+export default function CardImageClient({
     name,
     image_path,
     width = '100%',
     height = 220,
+    collectImage
 }: Props) {
 
     const [open, setOpen] = useState<boolean>(false)
-
 
 
     return (
@@ -72,7 +79,7 @@ export default function AreaCard({
                 }}
             >
             </CardContent>
-            <ModalImage open={open} setOpen={setOpen} />
+            <ModalImage open={open} setOpen={setOpen} collectImage={collectImage} />
         </Card>
     );
 }

@@ -1,4 +1,3 @@
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,55 +10,72 @@ interface Props {
   name: string;
   image: string;
   width?: number | string;
-  height?: number;
   link: string;
 }
 
 export default function AreaCard({
   name,
   image,
-  width = '100%',
-  height = 220,
-  link
+  width = "100%",
+  link,
 }: Props) {
   return (
-    <Link href={link} style={{textDecoration: 'none'}}>
+    <Link
+      href={link}
+      style={{
+        textDecoration: "none",
+        display: 'flex',
+        width,
+        alignItems: 'center'
+      }}
+    >
       <Card
         elevation={3}
         sx={{
-          width,
+          border: "5px solid #fff",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
           borderRadius: 3,
           overflow: "hidden",
           transition: "0.25s ease",
           "&:hover": {
             transform: "translateY(-6px)",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+            boxShadow: "0px 20px 30px rgba(0,0,0,0.15)",
           },
         }}
       >
-        <CardActionArea>
-          <Box sx={{ position: "relative" }}>
+        <CardActionArea
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+          }}
+        >
+          <Box
+            sx={{
+              height: 220,
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
             <CardMedia
               component="img"
-              height={height}
               image={image}
               alt={name}
               sx={{
+                height: "100%",
+                width: "100%",
                 objectFit: "cover",
-                transition: "0.3s ease",
-                "&:hover": {
-                  transform: "scale(1.03)",
-                },
               }}
             />
 
-            {/* Overlay leve para dar contraste */}
             <Box
               sx={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.35), transparent 60%)",
+                  "linear-gradient(to top, rgba(0,0,0,0.3), transparent 70%)",
               }}
             />
           </Box>
@@ -68,6 +84,7 @@ export default function AreaCard({
             sx={{
               textAlign: "center",
               py: 2,
+              bgcolor: "#fff",
             }}
           >
             <Typography
@@ -75,6 +92,7 @@ export default function AreaCard({
               fontWeight={600}
               sx={{
                 lineHeight: 1.2,
+                color: "#000",
               }}
             >
               {name}

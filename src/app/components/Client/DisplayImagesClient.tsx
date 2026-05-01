@@ -1,21 +1,19 @@
 'use client'
 
 import { Box, Paper, IconButton } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { buttomDisplayLeft, buttomDisplayRight } from "@/styles/components/ButtomStyles";
 
 interface Props {
-  images : string[]
+  images: string[]
 }
 
-export default function DisplayImagesClient({images} : Props) {
-
+export default function DisplayImagesClient({ images }: Props) {
   const [current, setCurrent] = useState(0);
-  
 
   const nextSlide = () => {
-    
     setCurrent((prev) => (prev + 1) % images.length);
   };
 
@@ -26,6 +24,7 @@ export default function DisplayImagesClient({images} : Props) {
   };
 
   useEffect(() => {
+    if (images.length <= 1) return;
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [images.length]);
@@ -34,93 +33,59 @@ export default function DisplayImagesClient({images} : Props) {
     <Box
       sx={{
         position: 'relative',
-        borderRadius: 3,
+        borderRadius: 4,
         overflow: 'hidden',
-        width: "100%"
+        width: "100%",
+        height: "100%",
+        minHeight: { xs: 300, md: 400 },
+        display: 'flex',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
       }}
     >
       <Paper
-        elevation={6}
+        elevation={0}
         sx={{
           width: '100%',
-          height: 300,
+          height: '100%',
           backgroundImage: `url(${images[current]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          transition: 'background-image 0.5s ease-in-out',
-          borderRadius: 3,
+          transition: 'background-image 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+          borderRadius: 0,
         }}
       />
 
-      <IconButton
-        onClick={prevSlide}
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: 12,
-          transform: 'translateY(-50%)',
-          backgroundColor: 'rgba(0,0,0,0.4)',
-          color: '#fff',
-          '&:hover': {
-            backgroundColor: 'rgba(0,0,0,0.7)',
-          },
-        }}
-      >
-        <ArrowBackIcon />
-      </IconButton>
-
-      <IconButton
-        onClick={nextSlide}
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          right: 12,
-          transform: 'translateY(-50%)',
-          backgroundColor: 'rgba(0,0,0,0.4)',
-          color: '#fff',
-          '&:hover': {
-            backgroundColor: 'rgba(0,0,0,0.7)',
-          },
-        }}
-      >
-        <ArrowForwardIcon />
-      </IconButton>
 
       <Box
         sx={{
           position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
           bottom: 0,
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          py: 1,
-          backgroundColor: 'rgba(0,0,0,0.6)',
-          color: '#fff',
-          fontSize: 14,
+          background: 'linear-gradient(to bottom, transparent 80%, rgba(0,0,0,0.2))',
+          pointerEvents: 'none',
         }}
-      >
-        {
-          images.map((_, index) => {
-            return (
-              <Box
-                key={index}
-                onClick={() => setCurrent(index)}
-                sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  mx: 0.5,
-                  cursor: 'pointer',
-                  backgroundColor:
-                    index === current ? 'white' : 'rgba(255,255,255,0.4)',
-                  transition: '0.3s',
-                }}
-              />
-            );
-          })
-        }
-      </Box>
+      />
+
+      {images.length > 1 && (
+        <>
+          <IconButton
+            onClick={prevSlide}
+            sx={buttomDisplayLeft}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+
+          <IconButton
+            onClick={nextSlide}
+            sx={buttomDisplayRight}
+          >
+            <ArrowForwardIcon />
+          </IconButton>
+        </>
+      )}
+
     </Box>
   );
 }
