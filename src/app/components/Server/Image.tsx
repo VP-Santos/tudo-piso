@@ -6,7 +6,7 @@ interface Props {
     height ?: number | string
 }
 
-export default function Image({ path, name, height = 250 }: Props) {
+export default function Image({ path, name, height = 300 }: Props) {
     return (
         <Box
             component="img"

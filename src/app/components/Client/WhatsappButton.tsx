@@ -4,11 +4,10 @@ import { buttomWhatsapp } from "@/styles/components/ButtomStyles";
 import { Button } from "@mui/material";
 
 interface Props {
-  width?: string | number
   message?: string
 }
 
-export default function WhatsAppButton({ width = '50%', message = "Olá! Vim pelo site do vitor, quero agendar meu orçamento!." }: Props) {
+export default function WhatsAppButton({message = "Olá! Vim pelo site do vitor, quero agendar meu orçamento!." }: Props) {
 
   const handleClick = () => {
     const numero = process.env.NEXT_PUBLIC_PHONE_NUMBER;

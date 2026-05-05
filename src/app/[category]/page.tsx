@@ -10,6 +10,13 @@ import {
 } from "@mui/material";
 import AreaCard from "../components/Server/CardImage";
 import ReactMarkdown from "react-markdown";
+import {
+  categoryMainPaper,
+  manufacturerHeader,
+  typoTitle,
+  typoDescription
+} from "@/styles/components/PaperStyles";
+import NotFound from "@/app/not-found";
 
 type Props = {
   params: { category: string };
@@ -31,102 +38,64 @@ export default async function CategoryPage({ params }: Props) {
       },
     },
   });
-
-  if (!category) return <></>;
+  
+  console.log(category);
+  
+  if (!category) return <NotFound/>;
 
   return (
     <Box component={'main'}>
       <NavBar />
-      <Container maxWidth="xl" >
-        {/*TODO COLOCAR ESTILOS EM ARQUIVOS A PARTE*/}
-        <Paper
-          elevation={8}
-          sx={{
-            mt: 6,
-            mb: 6,
-            px: 4,
-            py: 4,
-            borderRadius: 10,
-            backgroundColor: "#f5f5f5",
-          }}
-        >
-          <Typography
-            variant="h4"
-            component="h1"
-            fontWeight={700}
-            textAlign={'center'}
-            gutterBottom
-          >
+      <Container maxWidth="xl">
+
+        <Paper sx={categoryMainPaper}>
+          <Typography variant="h4" component="h1" sx={{ ...typoTitle, mb: 3 }}>
             {category.name}
           </Typography>
 
-          <Box sx={{ color: "text.secondary" }}>
-            <ReactMarkdown>
-              {category.description}
-            </ReactMarkdown>
+          <Box sx={{ ...typoDescription, mb: 4 }}>
+            <ReactMarkdown>{category.description}</ReactMarkdown>
           </Box>
 
-          {category.category_manufacturer.map((item) => {
+          {category.category_manufacturer.map((item) => (
+            <Stack key={item.id} sx={{ mb: 6 }}>
 
-            return (
-              <Stack key={item.id}>
+              <Box sx={manufacturerHeader}>
                 <Box
+                  component="img"
+                  src={item.manufacturers.image_path}
+                  alt={`Logo ${item.manufacturers.name}`}
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    p: 2,
-                    borderRadius: 2,
-                    bgcolor: "#cfcfcf",
-                    boxShadow: 5,
+                    width: 80,
+                    height: 80,
+                    objectFit: 'contain',
+                    borderRadius: '4px'
                   }}
-                >
-                  <Box
-                    component="img"
-                    src={item.manufacturers.image_path}
-                    alt={`Logo ${item.manufacturers.name}`}
-                    loading="lazy"
-                    sx={{
-                      height: 60,
-                      width: 60,
-                      objectFit: "contain",
-                      borderRadius: 1,
-                      bgcolor: "#fff",
-                      p: 1,
-                    }}
-                  />
-
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight={600}>
-                      {item.manufacturers.name}
-                    </Typography>
-
-                    <Typography variant="body2" color="text.secondary">
-                      {item.manufacturers.origin}
-                    </Typography>
-                  </Box>
+                />
+                <Box>
+                  <Typography variant="subtitle1" fontWeight={700}>
+                    {item.manufacturers.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {item.manufacturers.origin}
+                  </Typography>
                 </Box>
+              </Box>
 
-                <Grid container spacing={4} p={3}>
-                  {
-                    item.product_lines.map((line) => {
+              <Grid container spacing={4} p={1}>
+                {item.product_lines.map((line) => (
+                  <Grid key={line.id} size={{ xs: 12, sm: 6, md: 3 }}>
+                    <AreaCard
+                      name={line.name}
+                      image={line.image_path}
+                      link={`/${categorySlug}/${line.slug}`}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
 
-                      return (
-                        <Grid key={line.id} size={{ xs: 12, sm: 6, md: 3 }}>
-                          <AreaCard
-                            name={line.name}
-                            image={line.image_path}
-                            link={`/${categorySlug}/${line.slug}`}
-                          />
-                        </Grid>
-                      );
-                    })
-                  }
-                </Grid>
-              </Stack>
-            );
-          })
-          }
+            </Stack>
+          ))}
         </Paper>
       </Container>
     </Box>

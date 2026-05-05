@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { buttomDisplayLeft, buttomDisplayRight } from "@/styles/components/ButtomStyles";
+import { Theme } from "@/styles/Theme";
 
 interface Props {
   images: string[]
@@ -32,8 +33,9 @@ export default function DisplayImagesClient({ images }: Props) {
   return (
     <Box
       sx={{
+        border: `3px solid ${Theme.colors.background.paper}`,
+        borderRadius: Theme.radius.md,
         position: 'relative',
-        borderRadius: 4,
         overflow: 'hidden',
         width: "100%",
         height: "100%",

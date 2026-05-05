@@ -9,6 +9,7 @@ import WhatsAppButton from './components/Client/WhatsappButton';
 import DisplayImages from './components/Server/DisplayImages';
 import { Theme } from '@/styles/Theme';
 import { buttom } from '@/styles/components/ButtomStyles';
+import { paperDescription, paperInformation } from '@/styles/components/PaperStyles';
 
 export default async function Home() {
   const categories = await prisma.categories.findMany({
@@ -23,31 +24,14 @@ export default async function Home() {
         <Grid container spacing={4} sx={{ mb: 6 }} alignItems="stretch">
 
           <Grid
-            size={{ xs: 12, md: 6 }}
-            sx={{
-              border: `3px solid ${Theme.colors.background.paper}`,
-              borderRadius: Theme.radius.md,
-            }}
-          >
+            size={{ xs: 12, md: 6 }}>
             <DisplayImages />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex' }}>
             <Paper
               elevation={4}
-              sx={{
-                flex: 1,
-                backgroundColor: Theme.colors.background.paper,
-                color: Theme.colors.text.primary,
-                p: 3,
-                borderRadius: Theme.radius.lg,
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                boxShadow: Theme.shadow.lg,
-              }}
+              sx={paperInformation}
             >
               <Typography
                 variant="h4"
@@ -83,7 +67,7 @@ export default async function Home() {
                   fontStyle: 'italic',
                 }}
               >
-                "Mais do que instalar pisos, realizamos projetos que transformam espaços."
+                Mais do que instalar pisos, realizamos projetos que transformam espaços.
               </Typography>
 
               <Link
@@ -107,12 +91,10 @@ export default async function Home() {
 
         <Grid
           container
+          mb={6}
           spacing={3}
-          sx={{
-            width: '100%',
-            mb: 6,
-            justifyContent: 'center',
-          }}
+          width={'100%'}
+          justifyContent={'center'}
         >
           <Grid
             container
@@ -131,7 +113,7 @@ export default async function Home() {
                 >
                   <AreaCard
                     name={item.name}
-                    image={item.image}
+                    image={item.image_path}
                     link={`/${slug}`}
                   />
                 </Grid>
@@ -140,23 +122,17 @@ export default async function Home() {
           </Grid>
         </Grid>
 
-        <Box sx={{ mb: 4 }}>
           <Paper
             elevation={0}
-            sx={{
-              p: { xs: 3, md: 8 },
-              textAlign: 'center',
-              borderRadius: Theme.radius.lg,
-              border: `1px solid ${Theme.colors.border}`,
-              bgcolor: Theme.colors.background.paper,
-            }}
+            sx={paperDescription}
           >
-            <Typography variant="h5" fontWeight={700} gutterBottom>
+            <Typography variant="h5" fontWeight={700} textAlign={'center'}>
               Sobre a Tudo Piso
             </Typography>
 
             <Typography
               variant="h6"
+              textAlign={'center'}
               sx={{
                 mb: 4,
                 fontSize: { xs: 16, md: 18 },
@@ -191,7 +167,6 @@ export default async function Home() {
               <WhatsAppButton />
             </Box>
           </Paper>
-        </Box>
       </Container>
 
       <Footer />

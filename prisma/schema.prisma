@@ -3,24 +3,25 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  // provider  = "postgresql"
+  provider  = "mysql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model categories {
-  id                    BigInt                  @id(map: "category_pkey") @default(autoincrement())
+  id                    BigInt                  @id @default(autoincrement())
   name                  String
-  image                 String
-  description           String
+  image_path            String
+  description           String                  @db.Text
   slug                  String
   category_manufacturer category_manufacturer[]
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model category_manufacturer {
-  id              BigInt          @id(map: "manufacturer_category_pkey") @default(autoincrement())
+  id              BigInt          @id @default(autoincrement())
   manufacturer_id BigInt
   category_id     BigInt
   categories      categories      @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "manufacturer_categories_category_id_fkey")
@@ -31,9 +32,9 @@ model category_manufacturer {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model manufacturers {
   id                    BigInt                  @id @default(autoincrement())
-  name                  String                  @db.VarChar
-  description           String
-  origin                String                  @db.VarChar
+  name                  String
+  description           String                  @db.Text
+  origin                String
   image_path            String
   slug                  String
   category_manufacturer category_manufacturer[]
@@ -42,14 +43,14 @@ model manufacturers {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model product_lines {
   id                       BigInt                @id @default(autoincrement())
-  name                     String                @db.VarChar
+  name                     String
   width                    Float
   length                   Float
   category_manufacturer_id BigInt
   image_path               String
   slug                     String
   thickness                String?
-  description              String?
+  description              String?              @db.Text
   category_manufacturer    category_manufacturer @relation(fields: [category_manufacturer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   products                 products[]
 }
@@ -58,7 +59,7 @@ model product_lines {
 model products {
   id                      BigInt                    @id @default(autoincrement())
   product_line_id         BigInt
-  name                    String                    @db.VarChar
+  name                    String
   code                    String
   image_path              String
   slug                    String
@@ -77,7 +78,7 @@ model installations_performed {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model images_istallations {
-  id                         BigInt                  @id(map: "Images_istallations_pkey") @default(autoincrement())
+  id                         BigInt                  @id @default(autoincrement())
   installations_performed_id BigInt
   image_path                 String
   installations_performed    installations_performed @relation(fields: [installations_performed_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Images_istallations_installations_performed_id_fkey")

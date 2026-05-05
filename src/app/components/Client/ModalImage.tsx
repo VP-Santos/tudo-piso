@@ -24,9 +24,6 @@ export default function ModalImage({ open, setOpen, collectImage }: Props) {
 
   const images = collectImage.map((img) => `${img.image_path}`);
 
-  console.log(images[3]);
-
-  //TODO refatorar para arquivos de theme
   return (
     <Box>
       <Button
@@ -66,11 +63,10 @@ export default function ModalImage({ open, setOpen, collectImage }: Props) {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: { xs: '80%', md: 800 },
-          height: 400, // 👈 ESSENCIAL
+          height: 400,
           bgcolor: 'background.paper',
           borderRadius: 2,
           boxShadow: 24,
-          p: { xs: 2, md: 4 },
         }}
       >
           <DisplayImagesClient images={images} />
