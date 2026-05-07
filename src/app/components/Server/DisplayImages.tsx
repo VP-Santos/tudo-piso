@@ -1,15 +1,16 @@
+import { prisma } from "@/lib/prisma";
 import DisplayImagesClient from "../Client/DisplayImagesClient";
 
-export default function DisplayImages() {
+export default async function DisplayImages() {
 
-    const images = [
-        "/assets/display/piso.jpg",
-        "/assets/display/piso2.jpg",
-        "/assets/display/piso3.jpeg",
-        "/assets/category/laminado.png",
-        "/assets/category/vinilico.png",
-        "/assets/category/acabamento.png",
-    ];
+    const images_istallations = await prisma.images_istallations.findMany({
+        select: {
+            image_path: true,
+        },
+        take: 5,
+    });
+
+    const images = images_istallations.map((item) => item.image_path);
 
     return <DisplayImagesClient images={images} />
 }

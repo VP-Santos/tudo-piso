@@ -103,7 +103,6 @@ export default async function Home() {
             sx={{ px: { xs: 2, md: 0 } }}
           >
             {categories.map((item) => {
-              const slug = item.slug.toLowerCase().replace(/\s+/g, '-');
 
               return (
                 <Grid
@@ -114,7 +113,7 @@ export default async function Home() {
                   <AreaCard
                     name={item.name}
                     image={item.image_path}
-                    link={`/${slug}`}
+                    link={`/${item.slug}`}
                   />
                 </Grid>
               );

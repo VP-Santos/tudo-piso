@@ -39,7 +39,6 @@ export default async function CategoryPage({ params }: Props) {
     },
   });
   
-  console.log(category);
   
   if (!category) return <NotFound/>;
 

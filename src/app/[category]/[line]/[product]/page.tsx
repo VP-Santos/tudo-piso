@@ -42,7 +42,7 @@ export default async function ProductPage({
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, sm: 6 }}>
               <Image
-                path={`/${productFind.image_path}`}
+                path={productFind.image_path}
                 name={productFind.name}
               />
             </Grid>
@@ -89,7 +89,7 @@ export default async function ProductPage({
                 {productFind.installations_performed.map((inst) => (
                   <Grid key={inst.id} size={{ xs: 12, sm: 6, md: 4 }}>
                     <CardImageClient
-                      image_path={`/${inst.image_path}`}
+                      image_path={inst.image_path}
                       collectImage={inst.images_istallations}
                     />
                   </Grid>

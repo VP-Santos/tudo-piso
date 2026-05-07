@@ -5,11 +5,11 @@ import { prisma } from '@/lib/prisma';
 import { Box, Container, Grid, Paper, Typography, Stack } from '@mui/material';
 
 // Importando seus novos estilos compactos
-import { 
-  lineProductPaper, 
-  typoTitle, 
-  typoDescription, 
-  technicalSpecsBox 
+import {
+  lineProductPaper,
+  typoTitle,
+  typoDescription,
+  technicalSpecsBox
 } from '@/styles/components/PaperStyles';
 import NotFound from '@/app/not-found';
 
@@ -27,9 +27,9 @@ export default async function LinePage({ params }: PageProps) {
     where: { slug: line },
     include: { products: true },
   });
-  
-  
-  if (!lineData) return <NotFound/>;
+
+
+  if (!lineData) return <NotFound />;
 
   return (
     <Box>
@@ -37,41 +37,56 @@ export default async function LinePage({ params }: PageProps) {
 
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <Paper sx={lineProductPaper}>
-          
-          <Typography variant="h6" sx={typoTitle}>
-            {lineData.name}
-          </Typography>
 
-          <Box sx={technicalSpecsBox}>
-            <Typography sx={typoDescription}>
-              <strong>Descrição:</strong> {lineData.description}
-            </Typography>
-            
-            <Stack direction="row" spacing={3} mt={1}>
-              <Typography variant="body2">
-                <strong>Largura:</strong> {lineData.width} cm
+          {lineData.products.length > 0 ? (
+            <>
+              <Typography variant="h6" sx={typoTitle}>
+                {lineData.name}
               </Typography>
-              <Typography variant="body2">
-                <strong>Comprimento:</strong> {lineData.length} cm
-              </Typography>
-            </Stack>
-          </Box>
 
-          <Grid container spacing={3}>
-            {lineData.products.map((product) => (
-              <Grid key={product.id} size={{ xs: 6, sm: 4, md: 3 }}>
-                <AreaCard
-                  name={product.name}
-                  image={'/assets/piso2.jpg'}
-                  link={`/${category}/${line}/${product.slug}`} 
-                />
+              <Box sx={technicalSpecsBox}>
+                <Typography sx={typoDescription}>
+                  <strong>Descrição:</strong> {lineData.description}
+                </Typography>
+
+                <Stack direction="row" spacing={3} mt={1}>
+                  <Typography variant="body2">
+                    <strong>Largura:</strong> {lineData.width} cm
+                  </Typography>
+
+                  <Typography variant="body2">
+                    <strong>Comprimento:</strong> {lineData.length} cm
+                  </Typography>
+                </Stack>
+              </Box>
+
+              <Grid container spacing={3}>
+                {lineData.products.map((product) => (
+                  <Grid key={product.id} size={{ xs: 6, sm: 4, md: 3 }}>
+                    <AreaCard
+                      name={product.name}
+                      image={product.image_path}
+                      link={`/${category}/${line}/${product.slug}`}
+                    />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-          
+            </>
+          ) : (
+            <Box sx={{ py: 8, textAlign: 'center' }}>
+              <Typography variant="h5" gutterBottom>
+                Nenhum produto encontrado
+              </Typography>
+
+              <Typography variant="body1" color="text.secondary">
+                Esta linha ainda não possui produtos cadastrados.
+              </Typography>
+            </Box>
+          )}
+
         </Paper>
       </Container>
-      
+
       <Footer />
     </Box>
   );
