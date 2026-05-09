@@ -62,7 +62,7 @@ export default async function LinePage({ params }: PageProps) {
 
               <Grid container spacing={3}>
                 {lineData.products.map((product) => (
-                  <Grid key={product.id} size={{ xs: 6, sm: 4, md: 3 }}>
+                  <Grid key={product.id} size={{ xs: 12, sm: 4, md: 3 }}>
                     <AreaCard
                       name={product.name}
                       image={product.image_path}
