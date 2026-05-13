@@ -164,8 +164,4 @@ Após finalizar a configuração do banco de dados, execute:
 npm run dev
 ```
 
-A aplicação estará disponível em:
-
-```bash
-http://localhost:3000
-```
+A aplicação estará disponível em: http://localhost:3000
