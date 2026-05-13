@@ -153,7 +153,7 @@ npx prisma migrate dev
 ### Popule o banco com dados de teste
 
 ```bash
-npm ts-node prisma/seed.ts
+npx ts-node prisma/seed.ts
 ```
 
 # Execute o projeto:
