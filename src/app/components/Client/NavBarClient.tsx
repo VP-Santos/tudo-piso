@@ -31,7 +31,7 @@ interface Props {
 	categories: {
 		id: bigint;
 		name: string;
-		image: string;
+		image_path: string;
 		slug: string;
 	}[];
 }

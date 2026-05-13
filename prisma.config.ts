@@ -12,10 +12,7 @@ export default defineConfig({
   engine: "classic",
   datasource: {
     url: env("DATABASE_URL"),
-  },
-  seed: {
-    run: "ts-node prisma/seed.ts",
-  },
+  }
 });
 
 
